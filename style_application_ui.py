@@ -23,12 +23,12 @@ st.markdown('\n')
 #About
 expander_bar = st.beta_expander('About this App')
 expander_bar.markdown("""
-**Description**: This app allows you to apply styl transfer from one image to another.\n
+**Description**: This app allows you to apply style transfer from one image to another.\n
 **Audience**: Art related\n 
 **Data Sources**: Image upload\n 
 **Methods**: Neural Style Transfer.\n 
 **Python Libraries**: Streamlit, Pytorch \n
-**Authors**: Alena Kalodzitsa, Ronald Nhondova,\n """)
+**Authors**: Alena Kalodzitsa, Jose Luis,Ronald Nhondova and Varun Prasad\n """)
 
 st.markdown('\n')
 st.markdown('\n')
