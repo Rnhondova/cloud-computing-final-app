@@ -51,22 +51,31 @@ def post_image(URL,img_file):
     response = requests.post(URL, files={'file': ('image.png', buf, 'image/png')})
     return response 
 
-image_file = st.file_uploader("Upload Files",type=['png','jpeg','jpg'])
-if image_file is not None:
+col1, col2 = st.beta_columns(2)
+#image_file = st.file_uploader("Upload Files",type=['png','jpeg','jpg'])
+image_file = col1.file_uploader("Upload Image to style",type=['png','jpeg','jpg'])
+style_file = col2.file_uploader("Upload Style Image",type=['png','jpeg','jpg'])
+if image_file is not None or style_file is not None:
     #file_details = {"FileName":image_file.name,"FileType":image_file.type,"FileSize":image_file.size}
     #st.write(file_details)
 
-    img = load_image(image_file)
-    st.image(img, caption='Uploaded Image.', use_column_width=True)
+    #img = load_image(image_file)
+    #st.image(img, caption='Uploaded Image.', use_column_width=True)
+
+    img_base = load_image(image_file)
+    col1.image(img_base, caption='Uploaded Image.')
+
+    img_style = load_image(style_file)
+    col2.image(img_style, caption='Uploaded Image.')
 
     try:
-        response = post_image(model_endpoint,img)
+        response = post_image(model_endpoint,img_base)
         image_bytes = io.BytesIO(response.content)
 
         img = load_image(image_bytes)
         st.image(img, caption='Style Transfered Image.', use_column_width=True)
     except ValueError:
-        st.image(img, caption='Could not apply style transfer to Image.', use_column_width=True)
+        st.image(img_base, caption='Could not apply style transfer to Image.', use_column_width=True)
     
 
     
